@@ -25,7 +25,7 @@ class Tree:
         self.root = None
 
     def is_empty(self):
-        self.root == None
+        return self.root == None
 
     def count_nodes(self):
         # returns number of numbers within the tree
@@ -55,6 +55,12 @@ class Tree:
             print("Tree is empty.")
         else:
             self.root.post_order_traversal()
+
+    def height(self):
+        if self.is_empty():
+            return 0
+        else:
+            return self.root.height() + 1
 
 
 class Node:
@@ -90,6 +96,18 @@ class Node:
 
         print(self.data)
 
+    def height(self):
+        left_height = 0
+        right_height = 0
+
+        if self.left:
+            left_height = 1 + self.left.height()
+
+        if self.right:
+            right_height = 1 + self.right.height()
+
+        return max(left_height, right_height)
+
 
 tree = Tree()
 root = Node(10)
@@ -112,4 +130,5 @@ node_7 = Node(80)
 node_4.left = node_6
 node_4.right = node_7
 
-tree.post_order_traversal()
+# tree.post_order_traversal()
+print(tree.height())
