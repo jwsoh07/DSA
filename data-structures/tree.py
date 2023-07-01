@@ -62,6 +62,10 @@ class Tree:
         else:
             return self.root.height() + 1
 
+    def print_nodes_at_k_distance(self, k):
+        if not self.is_empty():
+            self.root.print_nodes_at_k_distance(k)
+
 
 class Node:
     def __init__(self, data):
@@ -108,6 +112,16 @@ class Node:
 
         return max(left_height, right_height)
 
+    def print_nodes_at_k_distance(self, k):
+        if k == 0:
+            print(self.data)
+
+        if self.left:
+            self.left.print_nodes_at_k_distance(k - 1)
+
+        if self.right:
+            self.right.print_nodes_at_k_distance(k - 1)
+
 
 tree = Tree()
 root = Node(10)
@@ -131,4 +145,5 @@ node_4.left = node_6
 node_4.right = node_7
 
 # tree.post_order_traversal()
-print(tree.height())
+# print(tree.height())
+tree.print_nodes_at_k_distance(3)
