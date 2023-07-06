@@ -23,6 +23,7 @@
 class Tree:
     def __init__(self):
         self.root = None
+        self.queue = []
 
     def is_empty(self):
         return self.root == None
@@ -65,6 +66,24 @@ class Tree:
     def print_nodes_at_k_distance(self, k):
         if not self.is_empty():
             self.root.print_nodes_at_k_distance(k)
+
+    def level_order_traversal(self):
+        # 1. Start with the root node of the tree and enqueue it into a queue data structure.
+        if self.root is not None:
+            self.queue.append(self.root)
+
+        # 2. While the queue is not empty, perform the following steps:
+            while self.queue:
+                # Dequeue a node from the front of the queue.
+                dequeued = self.queue.pop(0)
+                # Process the dequeued node (e.g., print its value).
+                print(dequeued.data)
+                # Enqueue its child nodes (if any) into the queue, from left to right.
+                if dequeued.left:
+                    self.queue.append(dequeued.left)
+
+                if dequeued.right:
+                    self.queue.append(dequeued.right)
 
 
 class Node:
@@ -146,4 +165,5 @@ node_4.right = node_7
 
 # tree.post_order_traversal()
 # print(tree.height())
-tree.print_nodes_at_k_distance(3)
+# tree.print_nodes_at_k_distance(3)
+tree.level_order_traversal()
